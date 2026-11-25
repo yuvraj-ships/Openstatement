@@ -44,25 +44,17 @@
             </p>
 
             <label class="slot" id="drop" tabindex="0">
-              <input type="file" id="file" accept="application/pdf,.pdf" hidden />
+              <input type="file" id="file" accept="application/pdf,.pdf" multiple hidden />
               <span class="slot-mouth" aria-hidden="true"></span>
               <span class="slot-body">
-                <span class="slot-title">Drop a statement PDF here</span>
-                <span class="slot-sub">or <u>browse your files</u> · password-protected PDFs work too</span>
+                <span class="slot-title">Drop statement PDFs here</span>
+                <span class="slot-sub">or <u>browse your files</u> · add several months at once · locked PDFs work too</span>
               </span>
               <span class="slot-arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4v13m0 0-5-5m5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </label>
 
-            <form id="password-form" class="unlock" hidden>
-              <label for="password" id="password-msg">This PDF is locked with a password.</label>
-              <div class="unlock-row">
-                <input type="password" id="password" placeholder="Statement password" autocomplete="off" required />
-                <button type="submit" class="btn ink">Unlock</button>
-              </div>
-              <small>Banks often use your date of birth or account number. The password never leaves this page.</small>
-            </form>
             <p id="status" class="status" role="status" aria-live="polite"></p>
           </div>
 
@@ -196,6 +188,44 @@ toCSV(transactions);</pre>
 
           <ul class="notes" id="warnings"></ul>
 
+          <section class="files" aria-label="Statements in this view">
+            <ul id="files" class="file-list"></ul>
+            <label class="btn add-files" tabindex="0">
+              <input type="file" id="file-more" accept="application/pdf,.pdf" multiple hidden />
+              <span aria-hidden="true">+</span> Add statements
+            </label>
+            <p id="files-note" class="files-note muted"></p>
+          </section>
+
+          <section class="block">
+            <header class="block-head"><h2>What stands out</h2></header>
+            <ul id="insights" class="insights"></ul>
+          </section>
+
+          <section class="block" id="monthly-block">
+            <header class="block-head">
+              <h2>Month by month</h2>
+              <div class="chart-legend" aria-hidden="true">
+                <span><i class="sw sw-in"></i>Money in</span>
+                <span><i class="sw sw-out"></i>Money out</span>
+              </div>
+            </header>
+            <div id="monthly" class="monthly"></div>
+            <details class="table-view">
+              <summary>Show as table</summary>
+              <table class="ledger compact">
+                <thead><tr><th>Month</th><th class="num">Money in</th><th class="num">Money out</th><th class="num">Net</th></tr></thead>
+                <tbody id="monthly-table"></tbody>
+              </table>
+            </details>
+          </section>
+
+          <section class="block" id="recurring-block">
+            <header class="block-head"><h2>Repeating payments</h2><span class="muted mono" id="recurring-total"></span></header>
+            <p class="muted block-intro">Same merchant, about the same amount, once a month — subscriptions, rent, memberships, EMIs.</p>
+            <ul id="recurring" class="recurring"></ul>
+          </section>
+
           <div class="split">
             <section class="block">
               <header class="block-head"><h2>Where it went</h2><span class="muted mono" id="out-total"></span></header>
@@ -234,6 +264,7 @@ toCSV(transactions);</pre>
               <span class="fix-toggle" aria-hidden="true">+</span>
             </summary>
             <div class="fix-body">
+              <label class="statement-pick" id="statement-pick" hidden>Statement<select id="opt-statement"></select></label>
               <div class="fields">
                 <label>Format preset<select id="opt-template"></select></label>
                 <label>Date order
@@ -263,6 +294,19 @@ toCSV(transactions);</pre>
           </details>
         </div>
       </section>
+
+      <dialog id="password-dialog">
+        <form method="dialog" id="password-form">
+          <h2>Locked statement</h2>
+          <p id="password-msg" class="muted"></p>
+          <label>Password<input type="password" id="password" autocomplete="off" required /></label>
+          <small class="muted">Banks often use your date of birth or account number. The password never leaves this page.</small>
+          <div class="dialog-actions">
+            <button class="btn ghost" value="skip" formnovalidate>Skip this file</button>
+            <button class="btn ink" value="ok">Unlock</button>
+          </div>
+        </form>
+      </dialog>
 
       <dialog id="template-dialog">
         <form method="dialog" id="template-form">

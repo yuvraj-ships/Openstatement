@@ -4,5 +4,7 @@ export { readPdf, parsePdf, PdfPasswordError, type PdfJsLike, type ReadPdfOption
 export { toCSV, toOFX, toQIF, toJSON, templateFromResult, type CsvOptions, type OfxOptions } from './export.js';
 export { templates, findTemplate, matchTemplate, validateTemplate } from './templates/index.js';
 export { categorize, CATEGORY_RULES } from './categorize.js';
+export { mergeStatements, type StatementInput, type MergeResult } from './merge.js';
+export { getInsights, merchantKey, type Insights, type MonthSummary, type RecurringPayment, type CategoryChange } from './insights.js';
 export { roleForHeader, NUMERIC_ROLES } from './headers.js';
 export { readDate, parseAmount, isAmount, isDate, detectDateOrder, detectNumberFormat, detectCurrency } from './tokens.js';

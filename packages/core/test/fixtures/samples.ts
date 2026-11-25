@@ -43,6 +43,8 @@ export interface Sample {
   noHeader?: boolean;
   rowsPerPage?: number;
   landscape?: boolean;
+  /** Samples with the same group are consecutive statements of one account. */
+  group?: string;
 }
 
 // --- formatting helpers ----------------------------------------------------
@@ -264,7 +266,62 @@ const japan: Sample = {
   ],
 };
 
-export const samples: Sample[] = [us, uk, de, india, newestFirst, japan];
+// --- three consecutive monthly statements (for merging & insights) -----------
+
+/** Jan–Mar 2026 for one account. Netflix, Spotify, gym and rent repeat monthly; shopping varies. */
+export const quarterTxs: SampleTx[] = [
+  { date: '2026-01-02', description: 'ACME CORP PAYROLL DIRECT DEP', amount: 2500 },
+  { date: '2026-01-05', description: 'ONLINE TRANSFER TO LANDLORD RENT', amount: -1200 },
+  { date: '2026-01-08', description: 'WHOLE FOODS MARKET #1021', amount: -84.12 },
+  { date: '2026-01-12', description: 'NETFLIX.COM', amount: -15.49 },
+  { date: '2026-01-15', description: 'IRONWORKS GYM MEMBERSHIP', amount: -39.0 },
+  { date: '2026-01-18', description: 'SPOTIFY USA', amount: -10.99 },
+  { date: '2026-01-21', description: 'UBER TRIP', amount: -18.4 },
+  { date: '2026-01-27', description: 'CITY ELECTRIC UTILITY', amount: -82.1 },
+  { date: '2026-02-02', description: 'ACME CORP PAYROLL DIRECT DEP', amount: 2500 },
+  { date: '2026-02-05', description: 'ONLINE TRANSFER TO LANDLORD RENT', amount: -1200 },
+  { date: '2026-02-09', description: 'WHOLE FOODS MARKET #1021', amount: -131.4 },
+  { date: '2026-02-12', description: 'NETFLIX.COM', amount: -15.49 },
+  { date: '2026-02-14', description: 'BISTRO LUNA VALENTINES', amount: -96.5 },
+  { date: '2026-02-15', description: 'IRONWORKS GYM MEMBERSHIP', amount: -39.0 },
+  { date: '2026-02-18', description: 'SPOTIFY USA', amount: -10.99 },
+  { date: '2026-02-26', description: 'AMAZON MKTPLACE PMTS', amount: -64.99 },
+  { date: '2026-02-27', description: 'CITY ELECTRIC UTILITY', amount: -91.35 },
+  { date: '2026-03-02', description: 'ACME CORP PAYROLL DIRECT DEP', amount: 2500 },
+  { date: '2026-03-05', description: 'ONLINE TRANSFER TO LANDLORD RENT', amount: -1200 },
+  { date: '2026-03-07', description: 'ZELLE FROM JORDAN LEE', amount: 60 },
+  { date: '2026-03-10', description: 'WHOLE FOODS MARKET #1021', amount: -57.75 },
+  { date: '2026-03-12', description: 'NETFLIX.COM', amount: -15.49 },
+  { date: '2026-03-15', description: 'IRONWORKS GYM MEMBERSHIP', amount: -39.0 },
+  { date: '2026-03-18', description: 'SPOTIFY USA', amount: -10.99 },
+  { date: '2026-03-22', description: 'UBER TRIP', amount: -31.75 },
+  { date: '2026-03-27', description: 'CITY ELECTRIC UTILITY', amount: -76.8 },
+];
+export const quarterOpening = 1850.25;
+
+function quarterSample(id: string, title: string, from: string, to: string): Sample {
+  let opening = quarterOpening;
+  for (const t of quarterTxs) if (t.date < from) opening = Math.round((opening + t.amount) * 100) / 100;
+  return {
+    ...us,
+    id,
+    group: 'us-quarter',
+    title,
+    description: 'One of three monthly statements — load them together to merge',
+    preamble: ['NORTHWIND BANK', 'Everyday Checking — Account ending 4821', `Statement period: ${mdy(from)} to ${mdy(to)}`, 'All amounts in USD'],
+    opening,
+    txs: quarterTxs.filter((t) => t.date >= from && t.date <= to),
+  };
+}
+
+/** The March download starts on Feb 26, so two February rows appear twice — the merge removes them. */
+export const quarter: Sample[] = [
+  quarterSample('us-2026-01', 'Northwind Bank (January 2026)', '2026-01-01', '2026-01-31'),
+  quarterSample('us-2026-02', 'Northwind Bank (February 2026)', '2026-02-01', '2026-02-28'),
+  quarterSample('us-2026-03', 'Northwind Bank (March 2026)', '2026-02-26', '2026-03-31'),
+];
+
+export const samples: Sample[] = [us, uk, de, india, newestFirst, japan, ...quarter];
 
 // --- rendering -------------------------------------------------------------
 

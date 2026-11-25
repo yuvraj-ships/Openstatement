@@ -21,9 +21,12 @@ export function toCSV(transactions: Transaction[], opts: CsvOptions = {}): strin
     return opts.decimalComma ? s.replace('.', ',') : s;
   };
   const esc = (v: string) => (/[",;\t\n\r]/.test(v) || v !== v.trim() ? `"${v.replace(/"/g, '""')}"` : v);
+  // Only add a "Statement" column when transactions come from more than one file.
+  const withSource = new Set(transactions.map((t) => t.source ?? '')).size > 1;
   const header = ['Date', 'Description', 'Amount', 'Money Out', 'Money In', 'Balance', 'Category', 'Reference', 'Value Date'];
-  const rows = transactions.map((t) =>
-    [
+  if (withSource) header.push('Statement');
+  const rows = transactions.map((t) => {
+    const cells = [
       t.date,
       esc(t.description),
       num(t.amount),
@@ -33,8 +36,10 @@ export function toCSV(transactions: Transaction[], opts: CsvOptions = {}): strin
       esc(t.category ?? ''),
       esc(t.reference ?? ''),
       t.valueDate ?? '',
-    ].join(d),
-  );
+    ];
+    if (withSource) cells.push(esc(t.source ?? ''));
+    return cells.join(d);
+  });
   return (opts.bom ? '﻿' : '') + [header.join(d), ...rows].join('\r\n') + '\r\n';
 }
 

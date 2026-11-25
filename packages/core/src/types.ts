@@ -56,6 +56,8 @@ export interface Transaction {
   reference?: string;
   category?: string;
   page: number;
+  /** Which statement this came from, when several statements are merged. */
+  source?: string;
 }
 
 /**

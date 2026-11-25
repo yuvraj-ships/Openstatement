@@ -46,5 +46,32 @@
     "currency": "JPY",
     "title": "Sakura Trust (no decimals, JPY)",
     "description": "YYYY/MM/DD dates, whole-number yen amounts"
+  },
+  {
+    "id": "us-2026-01",
+    "file": "us-2026-01.pdf",
+    "country": "US",
+    "currency": "USD",
+    "title": "Northwind Bank (January 2026)",
+    "description": "One of three monthly statements — load them together to merge",
+    "group": "us-quarter"
+  },
+  {
+    "id": "us-2026-02",
+    "file": "us-2026-02.pdf",
+    "country": "US",
+    "currency": "USD",
+    "title": "Northwind Bank (February 2026)",
+    "description": "One of three monthly statements — load them together to merge",
+    "group": "us-quarter"
+  },
+  {
+    "id": "us-2026-03",
+    "file": "us-2026-03.pdf",
+    "country": "US",
+    "currency": "USD",
+    "title": "Northwind Bank (March 2026)",
+    "description": "One of three monthly statements — load them together to merge",
+    "group": "us-quarter"
   }
 ]

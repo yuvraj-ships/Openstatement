@@ -1,8 +1,21 @@
 {
   "name": "openstatement",
-  "version": "0.1.0",
-  "description": "Parse bank statement PDFs from any bank into structured transactions. Runs in the browser and Node. Exports CSV, OFX, QIF and JSON.",
+  "version": "0.2.0",
+  "description": "Parse bank statement PDFs from any bank into structured transactions. Merge months, find subscriptions. Runs in the browser and Node. Exports CSV, OFX, QIF and JSON.",
   "license": "MIT",
+  "author": "yuvraj-ships (https://github.com/yuvraj-ships)",
+  "homepage": "https://yuvraj-ships.github.io/Openstatement/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuvraj-ships/Openstatement.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/yuvraj-ships/Openstatement/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -15,7 +28,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "sideEffects": false,
   "keywords": [
@@ -30,7 +44,8 @@
     "parser"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "pdfjs-dist": ">=4"

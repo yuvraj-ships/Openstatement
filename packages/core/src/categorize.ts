@@ -12,7 +12,7 @@ export const CATEGORY_RULES: [string, RegExp][] = [
   ['Subscriptions', /\b(netflix|spotify|youtube|prime\s*video|disney|hulu|hbo|apple\.com|icloud|google\s*(one|storage)|microsoft|office\s*365|adobe|dropbox|chatgpt|openai|anthropic|claude|github|patreon|hotstar|jiocinema)\b/i],
   ['Bills & Utilities', /\b(electric|electricity|power|water|gas\s*bill|utility|utilities|internet|broadband|wifi|mobile|phone|telecom|vodafone|verizon|at&t|t-mobile|airtel|jio|bsnl|comcast|xfinity|bt\s*group|telekom|orange|movistar)\b/i],
   ['Rent & Housing', /\b(rent|miete|loyer|alquiler|affitto|mortgage|hypothek|landlord|housing|hoa|maintenance\s*charges?)\b/i],
-  ['Health', /\b(pharmacy|chemist|apotheke|pharmacie|farmacia|hospital|clinic|doctor|dental|dentist|medical|cvs|walgreens|boots|apollo|practo|1mg|pharmeasy)\b/i],
+  ['Health', /\b(pharmacy|chemist|apotheke|pharmacie|farmacia|hospital|clinic|doctor|dental|dentist|medical|gym|fitness|yoga|cvs|walgreens|boots|apollo|practo|1mg|pharmeasy)\b/i],
   ['Insurance', /\b(insurance|versicherung|assurance|seguro|assicurazione|lic\b|premium)\b/i],
   ['Education', /\b(school|college|university|tuition|course|udemy|coursera|byju|unacademy|edx|duolingo)\b/i],
   ['Cash', /\b(atm|cash\s*(withdrawal|wdl)|nwd|geldautomat|retrait|cajero|prelievo)\b/i],

@@ -15,7 +15,15 @@ const index = [];
 for (const s of samples) {
   const file = `${s.id}.pdf`;
   writeFileSync(join(outDir, file), await renderSamplePdf(s));
-  index.push({ id: s.id, file, country: s.country, currency: s.currency, title: s.title, description: s.description });
+  index.push({
+    id: s.id,
+    file,
+    country: s.country,
+    currency: s.currency,
+    title: s.title,
+    description: s.description,
+    ...(s.group ? { group: s.group } : {}),
+  });
   console.log(`wrote samples/${file}`);
 }
 writeFileSync(join(outDir, 'index.json'), JSON.stringify(index, null, 2) + '\n');

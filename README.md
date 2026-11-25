@@ -33,6 +33,8 @@ OpenStatement does it for free, on your own device. The web app ships with a Con
 - 🔑 **Password-protected PDFs** — unlock them locally (many banks send these).
 - 📤 **Exports** — CSV, Excel-friendly CSV, **OFX** and **QIF** (GnuCash, YNAB, Actual Budget, Firefly III, Quicken, MoneyMoney…), JSON.
 - 🏷️ **Spending categories** — simple, transparent keyword rules anyone can extend.
+- 📚 **Many months at once** — drop 12 monthly PDFs and get one list; rows repeated in overlapping downloads are removed.
+- 📈 **Insights** — a month-by-month chart, your biggest category, best month for saving, and **repeating payments** (subscriptions, rent, memberships) with their yearly cost.
 - 🧠 **Learns banks from the community** — fix the columns once in the app, export a tiny JSON *template*, and send a pull request.
 
 ## How it works
@@ -80,6 +82,22 @@ await writeFile('statement.csv', toCSV(result.transactions));
 | `categorize` | Set `false` to skip categories. |
 
 Already have the text lines (e.g. from another PDF library)? Use `parseLines(lines, options)` directly.
+
+**Several statements and insights:**
+
+```ts
+import { mergeStatements, getInsights } from 'openstatement';
+
+const { transactions, duplicatesRemoved } = mergeStatements([
+  { name: 'jan.pdf', transactions: jan.transactions },
+  { name: 'feb.pdf', transactions: feb.transactions },
+]);
+
+const insights = getInsights(transactions);
+insights.months;     // [{ month: '2026-01', moneyIn, moneyOut, net, count }, …]
+insights.recurring;  // [{ name: 'NETFLIX.COM', amount: 15.49, months: 2, perYear: 185.88, … }]
+insights.topCategory; // { category: 'Rent & Housing', amount, share }
+```
 
 ## Run it locally
 
