@@ -20,6 +20,7 @@
     "samples": "tsx scripts/make-samples.ts"
   },
   "devDependencies": {
+    "@types/node": "^22.20.6",
     "pdf-lib": "^1.17.1",
     "tsup": "^9.0.0",
     "tsx": "^4.23.15",
