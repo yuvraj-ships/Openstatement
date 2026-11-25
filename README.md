@@ -11,6 +11,7 @@ Any bank · any country · free forever · your statement never leaves your devi
 [**Try it →**](https://yuvraj-ships.github.io/Openstatement/) · [Use the library](#use-it-as-a-library) · [Add your bank](CONTRIBUTING.md#add-your-bank-in-5-minutes)
 
 [![CI](https://github.com/yuvraj-ships/Openstatement/actions/workflows/ci.yml/badge.svg)](https://github.com/yuvraj-ships/Openstatement/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/openstatement.svg?color=d9541e)](https://www.npmjs.com/package/openstatement)
 [![License: MIT](https://img.shields.io/badge/license-MIT-teal.svg)](LICENSE)
 
 </div>
