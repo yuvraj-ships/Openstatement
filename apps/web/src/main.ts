@@ -30,7 +30,7 @@ import {
 pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
 const lib = pdfjs as unknown as PdfJsLike;
 
-const REPO_URL = 'https://github.com/Yuvrajsinh1812/Openstatement';
+const REPO_URL = 'https://github.com/yuvraj-ships/Openstatement';
 
 // ---------------------------------------------------------------------------
 // DOM helpers

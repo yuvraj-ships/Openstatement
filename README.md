@@ -8,9 +8,9 @@
 
 Any bank · any country · free forever · your statement never leaves your device
 
-[**Try it →**](https://yuvrajsinh1812.github.io/Openstatement/) · [Use the library](#use-it-as-a-library) · [Add your bank](CONTRIBUTING.md#add-your-bank-in-5-minutes)
+[**Try it →**](https://yuvraj-ships.github.io/Openstatement/) · [Use the library](#use-it-as-a-library) · [Add your bank](CONTRIBUTING.md#add-your-bank-in-5-minutes)
 
-[![CI](https://github.com/Yuvrajsinh1812/Openstatement/actions/workflows/ci.yml/badge.svg)](https://github.com/Yuvrajsinh1812/Openstatement/actions/workflows/ci.yml)
+[![CI](https://github.com/yuvraj-ships/Openstatement/actions/workflows/ci.yml/badge.svg)](https://github.com/yuvraj-ships/Openstatement/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-teal.svg)](LICENSE)
 
 </div>
@@ -84,7 +84,7 @@ Already have the text lines (e.g. from another PDF library)? Use `parseLines(lin
 ## Run it locally
 
 ```bash
-git clone https://github.com/Yuvrajsinh1812/Openstatement.git
+git clone https://github.com/yuvraj-ships/Openstatement.git
 cd Openstatement
 npm install
 npm run dev        # web app at http://localhost:5173
@@ -122,7 +122,7 @@ Nobody should commit a real bank statement. The test suite **generates PDFs from
 
 ## Contributing
 
-Contributions of every size are welcome — especially **adding your bank** or **your language**. See [CONTRIBUTING.md](CONTRIBUTING.md). Look for issues labelled [`good first issue`](https://github.com/Yuvrajsinh1812/Openstatement/labels/good%20first%20issue).
+Contributions of every size are welcome — especially **adding your bank** or **your language**. See [CONTRIBUTING.md](CONTRIBUTING.md). Look for issues labelled [`good first issue`](https://github.com/yuvraj-ships/Openstatement/labels/good%20first%20issue).
 
 ## License
 

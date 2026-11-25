@@ -23,6 +23,6 @@ toOFX(result);
 - Dates are ISO `YYYY-MM-DD`, sorted oldest first.
 - `meta.confidence` is 1 when every running balance adds up.
 
-Full documentation, the web app and contribution guide: see the [project README](https://github.com/Yuvrajsinh1812/Openstatement#readme).
+Full documentation, the web app and contribution guide: see the [project README](https://github.com/yuvraj-ships/Openstatement#readme).
 
 MIT licensed.
