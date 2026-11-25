@@ -1,0 +1,46 @@
+{
+  "name": "openstatement",
+  "version": "0.1.0",
+  "description": "Parse bank statement PDFs from any bank into structured transactions. Runs in the browser and Node. Exports CSV, OFX, QIF and JSON.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "bank-statement",
+    "pdf",
+    "csv",
+    "ofx",
+    "qif",
+    "finance",
+    "budgeting",
+    "privacy",
+    "parser"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+  },
+  "peerDependencies": {
+    "pdfjs-dist": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "pdfjs-dist": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "pdfjs-dist": "^6.5.438"
+  }
+}

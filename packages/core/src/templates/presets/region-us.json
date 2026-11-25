@@ -1,0 +1,7 @@
+{
+  "id": "region-us",
+  "name": "MM/DD/YYYY · 1,234.56 (United States, Philippines)",
+  "country": "XX",
+  "dateOrder": "MDY",
+  "numberFormat": { "decimal": "." }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "region-ymd",
+  "name": "YYYY-MM-DD · 1,234.56 (Japan, China, Korea, Sweden…)",
+  "country": "XX",
+  "dateOrder": "YMD",
+  "numberFormat": { "decimal": "." }
+}

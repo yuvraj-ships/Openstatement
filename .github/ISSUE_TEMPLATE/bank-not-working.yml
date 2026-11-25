@@ -1,0 +1,39 @@
+name: My bank's statement doesn't parse correctly
+description: Wrong dates, amounts, signs or missing rows for a specific bank.
+labels: [bank-support]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **Do not attach your statement or screenshots of it** — not even redacted. Describe the layout in words instead, or attach a bank template exported from the app (it contains only the layout).
+  - type: input
+    id: bank
+    attributes:
+      label: Bank and country
+      placeholder: e.g. Example Bank, Germany
+    validations:
+      required: true
+  - type: textarea
+    id: layout
+    attributes:
+      label: Layout
+      description: Column headers in order, how dates look, how amounts look (with fake numbers).
+      placeholder: |
+        Columns: Date | Description | Debit | Credit | Balance
+        Dates look like: 05-Jan-2026
+        Amounts look like: 1.234,56 and negative balances end with "-"
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What went wrong?
+      placeholder: e.g. money in and money out are swapped; descriptions are cut off after the first line
+    validations:
+      required: true
+  - type: textarea
+    id: template
+    attributes:
+      label: Bank template (optional)
+      description: Paste the JSON from "Save bank template…" in the app, after fixing the columns.
+      render: json

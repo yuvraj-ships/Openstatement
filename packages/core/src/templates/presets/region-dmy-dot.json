@@ -1,0 +1,7 @@
+{
+  "id": "region-dmy-dot",
+  "name": "DD/MM/YYYY · 1,234.56 (UK, India, Australia, Canada, Singapore…)",
+  "country": "XX",
+  "dateOrder": "DMY",
+  "numberFormat": { "decimal": "." }
+}

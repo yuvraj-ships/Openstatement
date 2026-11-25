@@ -1,0 +1,50 @@
+[
+  {
+    "id": "us-signed-amounts",
+    "file": "us-signed-amounts.pdf",
+    "country": "US",
+    "currency": "USD",
+    "title": "Northwind Bank (US style)",
+    "description": "MM/DD/YYYY dates, one signed Amount column, running balance"
+  },
+  {
+    "id": "uk-paid-in-out",
+    "file": "uk-paid-in-out.pdf",
+    "country": "GB",
+    "currency": "GBP",
+    "title": "Harbour Bank (UK style)",
+    "description": "DD Mon YYYY dates, Paid out / Paid in columns, balance brought forward"
+  },
+  {
+    "id": "de-comma-decimal",
+    "file": "de-comma-decimal.pdf",
+    "country": "DE",
+    "currency": "EUR",
+    "title": "Bergwerk Bank (German style)",
+    "description": "DD.MM.YYYY dates, value date, 1.234,56 amounts, German headers"
+  },
+  {
+    "id": "in-withdrawal-deposit",
+    "file": "in-withdrawal-deposit.pdf",
+    "country": "IN",
+    "currency": "INR",
+    "title": "Sahyadri Bank (India style)",
+    "description": "DD/MM/YY dates, Withdrawal / Deposit / Closing Balance, 2 pages, multi-line narration"
+  },
+  {
+    "id": "iso-newest-first-no-header",
+    "file": "iso-newest-first-no-header.pdf",
+    "country": "SG",
+    "currency": "SGD",
+    "title": "Coral Bank (newest first, no header)",
+    "description": "YYYY-MM-DD dates, no header row, unsigned amounts, newest transactions first"
+  },
+  {
+    "id": "jp-no-decimals",
+    "file": "jp-no-decimals.pdf",
+    "country": "JP",
+    "currency": "JPY",
+    "title": "Sakura Trust (no decimals, JPY)",
+    "description": "YYYY/MM/DD dates, whole-number yen amounts"
+  }
+]

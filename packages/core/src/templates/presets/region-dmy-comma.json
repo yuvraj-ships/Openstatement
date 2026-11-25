@@ -1,0 +1,7 @@
+{
+  "id": "region-dmy-comma",
+  "name": "DD.MM.YYYY · 1.234,56 (Germany, France, Spain, Italy, Brazil…)",
+  "country": "XX",
+  "dateOrder": "DMY",
+  "numberFormat": { "decimal": "," }
+}

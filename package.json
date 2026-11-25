@@ -1,0 +1,30 @@
+{
+  "name": "openstatement-monorepo",
+  "private": true,
+  "description": "Turn any bank statement PDF into clean CSV, Excel, OFX or QIF — 100% in your browser.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w openstatement && npm run build -w @openstatement/web",
+    "dev": "npm run dev -w @openstatement/web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p packages/core --noEmit && tsc -p apps/web --noEmit",
+    "samples": "tsx scripts/make-samples.ts"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  }
+}

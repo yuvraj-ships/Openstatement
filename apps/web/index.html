@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert any bank statement PDF to CSV, OFX or QIF. Free, open source, and private — it runs in your browser and never uploads your file." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>OpenStatement — bank statement PDF to CSV, privately</title>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <path id="stamp-circle" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
+      </defs>
+    </svg>
+
+    <header class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="wordmark" href="./" aria-label="OpenStatement home">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 2.5h9.5L19 7v14.5H5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 2.5V7H19" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 11h8M8 14h8M8 17h5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>OpenStatement</span>
+        </a>
+        <nav class="nav">
+          <a href="#how">How it works</a>
+          <a href="#library">Library</a>
+          <a class="repo-link" href="https://github.com/" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================ LANDING ============================ -->
+      <div id="landing">
+        <section class="wrap hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Free · Open source · Runs on your device</p>
+            <h1>Your bank sends PDFs.<br /><em>Your budget needs rows.</em></h1>
+            <p class="lede">
+              OpenStatement reads statements from any bank, in any country, and hands you clean
+              <b>CSV</b>, <b>OFX</b> or <b>QIF</b>. It works inside this tab — your file is never uploaded.
+            </p>
+
+            <label class="slot" id="drop" tabindex="0">
+              <input type="file" id="file" accept="application/pdf,.pdf" hidden />
+              <span class="slot-mouth" aria-hidden="true"></span>
+              <span class="slot-body">
+                <span class="slot-title">Drop a statement PDF here</span>
+                <span class="slot-sub">or <u>browse your files</u> · password-protected PDFs work too</span>
+              </span>
+              <span class="slot-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4v13m0 0-5-5m5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </label>
+
+            <form id="password-form" class="unlock" hidden>
+              <label for="password" id="password-msg">This PDF is locked with a password.</label>
+              <div class="unlock-row">
+                <input type="password" id="password" placeholder="Statement password" autocomplete="off" required />
+                <button type="submit" class="btn ink">Unlock</button>
+              </div>
+              <small>Banks often use your date of birth or account number. The password never leaves this page.</small>
+            </form>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="paper">
+              <div class="paper-head">
+                <span class="paper-bank">NORTHWIND BANK</span>
+                <span>Statement · Jan 2026</span>
+              </div>
+              <div class="paper-cols"><span>Date</span><span>Description</span><span>Amount</span><span>Balance</span></div>
+              <div class="paper-row" style="--i: 0"><span class="t-date">01/02</span><span>ACME CORP PAYROLL</span><span class="t-amt">2,500.00</span><span class="t-bal">4,350.25</span></div>
+              <div class="paper-row" style="--i: 1"><span class="t-date">01/03</span><span>STARBUCKS #1184</span><span class="t-amt">-5.75</span><span class="t-bal">4,344.50</span></div>
+              <div class="paper-row" style="--i: 2"><span class="t-date">01/05</span><span>ONLINE TRANSFER RENT</span><span class="t-amt">-1,200.00</span><span class="t-bal">3,144.50</span></div>
+              <div class="paper-row" style="--i: 3"><span class="t-date">01/07</span><span>AMAZON MKTPLACE</span><span class="t-amt">-64.99</span><span class="t-bal">3,079.51</span></div>
+              <div class="paper-row" style="--i: 4"><span class="t-date">01/09</span><span>UBER TRIP</span><span class="t-amt">-18.40</span><span class="t-bal">3,061.11</span></div>
+              <div class="paper-fade"></div>
+              <div class="scanline"></div>
+            </div>
+
+            <div class="output">
+              <div class="output-tab">statement.csv</div>
+              <pre><span class="o-head">date,description,amount,balance</span>
+<span class="o-line" style="--i: 0">2026-01-02,ACME CORP PAYROLL,<b class="in">2500.00</b>,4350.25</span>
+<span class="o-line" style="--i: 1">2026-01-03,STARBUCKS #1184,<b>-5.75</b>,4344.50</span>
+<span class="o-line" style="--i: 2">2026-01-05,ONLINE TRANSFER RENT,<b>-1200.00</b>,3144.50</span>
+<span class="o-line" style="--i: 3">2026-01-07,AMAZON MKTPLACE,<b>-64.99</b>,3079.51</span>
+<span class="o-line" style="--i: 4">2026-01-09,UBER TRIP,<b>-18.40</b>,3061.11</span></pre>
+            </div>
+
+            <svg class="stamp" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.5" />
+              <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="1.2" />
+              <text textLength="270" lengthAdjust="spacingAndGlyphs"><textPath href="#stamp-circle" startOffset="0" textLength="270" lengthAdjust="spacingAndGlyphs">PROCESSED LOCALLY ✦ NOTHING UPLOADED ✦</textPath></text>
+              <path d="M46 61l9 9 19-21" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </section>
+
+        <section class="wrap samples-section">
+          <div class="section-label">
+            <span>No statement handy?</span>
+            <span class="muted">Open one of these fictional banks — each mimics a different country's layout.</span>
+          </div>
+          <ol id="sample-list" class="index"></ol>
+        </section>
+
+        <div class="ticker" aria-label="Formats it understands">
+          <div class="ticker-track">
+            <span>DD/MM/YYYY</span><span>MM/DD/YYYY</span><span>2026-01-05</span><span>05 Jan 2026</span><span>5. Dez. 2026</span><span>4 févr.</span>
+            <span>1,234.56</span><span>1.234,56</span><span>1 234,56</span><span>12,34,567.89</span><span>¥12,000</span><span>(45.00)</span><span>45.00 DR</span><span>1.250,00-</span>
+            <span>Paid in / Paid out</span><span>Soll / Haben</span><span>Débit / Crédit</span><span>Cargo / Abono</span><span>Withdrawal / Deposit</span>
+            <span aria-hidden="true">DD/MM/YYYY</span><span aria-hidden="true">MM/DD/YYYY</span><span aria-hidden="true">2026-01-05</span><span aria-hidden="true">05 Jan 2026</span><span aria-hidden="true">5. Dez. 2026</span><span aria-hidden="true">4 févr.</span>
+            <span aria-hidden="true">1,234.56</span><span aria-hidden="true">1.234,56</span><span aria-hidden="true">1 234,56</span><span aria-hidden="true">12,34,567.89</span><span aria-hidden="true">¥12,000</span><span aria-hidden="true">(45.00)</span><span aria-hidden="true">45.00 DR</span><span aria-hidden="true">1.250,00-</span>
+            <span aria-hidden="true">Paid in / Paid out</span><span aria-hidden="true">Soll / Haben</span><span aria-hidden="true">Débit / Crédit</span><span aria-hidden="true">Cargo / Abono</span><span aria-hidden="true">Withdrawal / Deposit</span>
+          </div>
+        </div>
+
+        <section class="wrap how" id="how">
+          <div class="how-title">
+            <h2>How it reads<br /><em>a statement</em></h2>
+            <p class="muted">There's no code written for any particular bank. The same five steps handle a one-page credit-union PDF and a 40-page business statement.</p>
+          </div>
+          <ol class="how-steps">
+            <li>
+              <h3>Reads the page, not just the words</h3>
+              <p>pdf.js pulls out every piece of text with its position, right here in your browser.</p>
+            </li>
+            <li>
+              <h3>Finds the ledger</h3>
+              <p>Rows that start with a date and carry an amount are transactions. Headers, footers and page numbers are left behind.</p>
+            </li>
+            <li>
+              <h3>Works out the local format</h3>
+              <p>A “25/02” can only be day-first. A “1.234,56” is a European thousand. Column headers are read in seven languages.</p>
+            </li>
+            <li>
+              <h3>Checks the arithmetic</h3>
+              <p>Every row's running balance must equal the last one plus the amount. If the columns are swapped, the balance gives it away — and it gets fixed.</p>
+            </li>
+            <li>
+              <h3>Learns your bank, once</h3>
+              <p>If something's off, fix the columns and share the layout as a tiny template. The next person with your bank gets it right automatically.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="wrap library" id="library">
+          <div>
+            <h2>Also a library.</h2>
+            <p class="muted">Use the same parser in your own app, script or backend. Zero runtime dependencies, typed, works in browsers and Node.</p>
+          </div>
+          <pre class="code"><span class="c">$ npm install openstatement pdfjs-dist</span>
+
+<span class="k">import</span> { parsePdf, toCSV } <span class="k">from</span> <span class="s">'openstatement'</span>;
+
+<span class="k">const</span> { transactions, meta } = <span class="k">await</span> parsePdf(bytes, { pdfjs });
+meta.confidence   <span class="c">// 1 → every running balance adds up</span>
+toCSV(transactions);</pre>
+        </section>
+      </div>
+
+      <!-- ============================ RESULTS ============================ -->
+      <section id="results" class="results" hidden>
+        <div class="toolbar">
+          <div class="wrap toolbar-inner">
+            <button class="btn ghost" id="reset"><span aria-hidden="true">←</span> New file</button>
+            <div class="toolbar-title">
+              <span id="file-name"></span>
+              <span id="detected" class="mono muted"></span>
+            </div>
+            <div class="export">
+              <button class="btn ink" data-export="csv">Download CSV</button>
+              <details class="menu">
+                <summary class="btn" aria-label="More export formats">More <span aria-hidden="true">▾</span></summary>
+                <div class="menu-list">
+                  <button data-export="excel"><b>CSV for Excel</b><span>Opens correctly in your locale</span></button>
+                  <button data-export="ofx"><b>OFX</b><span>GnuCash, YNAB, Actual, Firefly III, Quicken</span></button>
+                  <button data-export="qif"><b>QIF</b><span>Older finance apps</span></button>
+                  <button data-export="json"><b>JSON</b><span>For developers</span></button>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <div class="wrap results-body">
+          <div class="summary">
+            <dl class="figures" id="figures"></dl>
+            <div id="verdict" class="verdict"></div>
+          </div>
+
+          <ul class="notes" id="warnings"></ul>
+
+          <div class="split">
+            <section class="block">
+              <header class="block-head"><h2>Where it went</h2><span class="muted mono" id="out-total"></span></header>
+              <div id="categories"></div>
+            </section>
+            <section class="block">
+              <header class="block-head"><h2>Where it came from</h2><span class="muted mono" id="in-total"></span></header>
+              <div id="income"></div>
+            </section>
+          </div>
+
+          <section class="block">
+            <header class="block-head">
+              <h2>Transactions</h2>
+              <label class="search">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                <input id="search" type="search" placeholder="Filter" aria-label="Filter transactions" />
+              </label>
+            </header>
+            <div class="ledger-wrap">
+              <table class="ledger">
+                <thead>
+                  <tr><th>Date</th><th>Description</th><th>Category</th><th class="num">Amount</th><th class="num">Balance</th></tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <details class="block fix" id="adjust">
+            <summary>
+              <span>
+                <h2>Fix the reading</h2>
+                <span class="muted">Wrong dates, numbers or columns? Correct them here — everything updates live.</span>
+              </span>
+              <span class="fix-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="fix-body">
+              <div class="fields">
+                <label>Format preset<select id="opt-template"></select></label>
+                <label>Date order
+                  <select id="opt-date">
+                    <option value="">Auto</option>
+                    <option value="DMY">Day / Month / Year</option>
+                    <option value="MDY">Month / Day / Year</option>
+                    <option value="YMD">Year / Month / Day</option>
+                  </select>
+                </label>
+                <label>Decimal mark
+                  <select id="opt-decimal">
+                    <option value="">Auto</option>
+                    <option value=".">1,234.56</option>
+                    <option value=",">1.234,56</option>
+                  </select>
+                </label>
+                <label>Currency<input id="opt-currency" maxlength="3" placeholder="Auto" spellcheck="false" /></label>
+              </div>
+              <h3 class="ruler-title">Columns, as they sit on the page</h3>
+              <div class="ruler-wrap"><div id="columns" class="ruler"></div></div>
+              <div class="share">
+                <p><b>Got it right?</b> Share the layout as a bank template so it works automatically for everyone at your bank. It holds column names and positions only — never transactions.</p>
+                <button class="btn" id="save-template">Save bank template…</button>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <dialog id="template-dialog">
+        <form method="dialog" id="template-form">
+          <h2>Save bank template</h2>
+          <p class="muted">A small JSON file describing the layout. Open it and check before sharing.</p>
+          <label>Bank name<input id="tpl-name" required placeholder="e.g. Monzo" /></label>
+          <label>Country code<input id="tpl-country" required maxlength="2" placeholder="e.g. GB" /></label>
+          <label>Text printed on every statement from this bank<input id="tpl-detect" placeholder="e.g. Monzo Bank Limited" /></label>
+          <div class="dialog-actions">
+            <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+            <button class="btn ink" value="ok">Download template</button>
+          </div>
+        </form>
+      </dialog>
+    </main>
+
+    <footer class="colophon">
+      <div class="wrap colophon-inner">
+        <span class="colophon-mark">OpenStatement</span>
+        <p>Free and open source under the MIT license. Not affiliated with any bank. Always double-check exported figures.</p>
+        <a class="repo-link" href="https://github.com/" target="_blank" rel="noopener">Contribute on GitHub ↗</a>
+      </div>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
